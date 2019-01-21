@@ -7,16 +7,10 @@ class Flock{
     
     for(int i=0; i<total; i++){
       Boid boid = new Boid();
+      boid.vel.setRandom(1);
+      boid.pos.set(width/2, height/2);
       boids.add(boid);
     }
-        
-    Boid b1 = boids.get(0);
-    b1.vel.set(0.2,0);
-    b1.pos.set(width/2, height/2);
-    
-    Boid b2 = boids.get(1);
-    b2.vel.set(0.1,0.1);
-    b2.pos.set(width/2, height/2);
   }
   
   void draw(){
