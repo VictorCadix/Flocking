@@ -23,8 +23,14 @@ class Boid{
     if(pos.x > width){
       pos.x = 0;
     }
+    else if(pos.x < 0){
+      pos.x = width;
+    }
     if(pos.y > height){
-      pos.x = 0;
+      pos.y = 0;
+    }
+    else if(pos.y < 0){
+      pos.y = height;
     }
   }
   void draw(){
