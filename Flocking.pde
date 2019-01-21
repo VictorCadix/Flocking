@@ -8,6 +8,7 @@ void setup(){
 
 void draw(){
   background(200);
-  
   flock.draw();
+  flock.update();
+  
 }

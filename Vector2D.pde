@@ -33,6 +33,11 @@ class Vector2D {
     this.y += vector.y;
   }
   
+  void substract (Vector2D vector){
+    this.x -= vector.x;
+    this.y -= vector.y;
+  }
+  
   void multiply_by (float gain){
     this.x *= gain;
     this.y *= gain;

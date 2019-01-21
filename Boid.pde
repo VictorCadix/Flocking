@@ -33,8 +33,15 @@ class Boid{
       pos.y = height;
     }
   }
+  
   void draw(){
     ellipse(pos.x, pos.y, size, size);
   }
   
+  float dist2(Boid other){
+    Vector2D dist = new Vector2D();
+    dist.set(this.pos);
+    dist.substract(other.pos);
+    return(abs(dist.getModule()));
+  }  
 }
