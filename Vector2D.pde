@@ -13,7 +13,7 @@ class Vector2D {
     this.y = v.y;
   }
   
-  void setRandom (float maxMod){
+  void setRandom_with_mod (float maxMod){
     this.x = random(-1, 1);
     this.y = random(-1, 1);
     
