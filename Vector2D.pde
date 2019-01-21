@@ -13,12 +13,19 @@ class Vector2D {
     this.y = v.y;
   }
   
-  void setRandom_with_mod (float maxMod){
+  void setRandom_with_maxMod (float maxMod){
     this.x = random(-1, 1);
     this.y = random(-1, 1);
     
     float magnitude = random(maxMod);
     this.setMagnitude(magnitude);
+  }
+  
+  void setRandom_with_mod (float mod){
+    this.x = random(-1, 1);
+    this.y = random(-1, 1);
+    
+    this.setMagnitude(mod);
   }
   
   void add (Vector2D vector){
