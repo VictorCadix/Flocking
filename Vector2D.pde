@@ -3,6 +3,11 @@ class Vector2D {
   float x;
   float y;
   
+  Vector2D(){
+    this.x = 0;
+    this.y = 0;
+  }
+  
   void set (float inX, float inY){
     this.x = inX;
     this.y = inY;
@@ -72,5 +77,9 @@ class Vector2D {
     v = this.getUnitVector();
     v.multiply_by(mag);
     this.set(v);
+  }
+  
+  void print_(){
+    print("[" + str(this.x) + "," + str(this.y) + "]");
   }
 }

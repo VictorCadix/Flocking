@@ -14,10 +14,14 @@ class Boid{
     vel = new Vector2D();
     acel = new Vector2D();
     pos_target = new Vector2D();
+    vel_target = new Vector2D();
   }
   
-  void update(){
-    vel.add(acel);
+  void update(ArrayList <Boid> near_boids){
+    vel_target = this.align(near_boids);
+    
+    vel.set(vel_target);
+    //vel.add(acel);
     pos.add(vel);
     
     if(pos.x > width){
@@ -43,5 +47,18 @@ class Boid{
     dist.set(this.pos);
     dist.substract(other.pos);
     return(abs(dist.getModule()));
-  }  
+  }
+  
+  Vector2D align(ArrayList <Boid> near_boids){
+    for(int i=0; i<near_boids.size(); i++){ //<>//
+      vel_target.add(near_boids.get(i).vel);
+    }
+    if (near_boids.size() != 0){
+      vel_target.divide_by(near_boids.size());
+    }
+    else{
+      vel_target.set(vel);
+    }
+    return(vel_target);
+  }
 }
