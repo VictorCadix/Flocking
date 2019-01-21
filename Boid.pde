@@ -47,6 +47,14 @@ class Vector2D {
     this.y = v.y;
   }
   
+  void setRandom (float maxMod){
+    this.x = random(-1, 1);
+    this.y = random(-1, 1);
+    
+    float magnitude = random(maxMod);
+    this.setMagnitude(magnitude);
+  }
+  
   void add (Vector2D vector){
     this.x += vector.x;
     this.y += vector.y;
@@ -79,5 +87,12 @@ class Vector2D {
     float mod = this.getModule();
     unit.multiply_by(mod);
     this.set(unit);
+  }
+  
+  void setMagnitude(float mag){
+    Vector2D v = new Vector2D();
+    v = this.getUnitVector();
+    v.multiply_by(mag);
+    this.set(v);
   }
 }
