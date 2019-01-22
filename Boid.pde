@@ -1,7 +1,7 @@
 
 class Boid{
   float size = 10;
-  float maxAcel = 0.05;
+  float maxAcel = 0.01;
   float maxVel = 2;
   
   Vector2D pos;
@@ -20,8 +20,10 @@ class Boid{
   }
   
   void update(ArrayList <Boid> near_boids){
+    acel.set(0,0);
+    acel.add(this.align(near_boids));
+    acel.add(this.cohesion(near_boids));
     
-    acel = this.align(near_boids);
     vel.add(acel);
     vel.setMagnitude(maxVel);
     pos.add(vel);
@@ -64,6 +66,27 @@ class Boid{
     }
     
     Vector2D force = new Vector2D(vel_target);
+    force.substract(vel);
+    if (force.getModule() > maxAcel){
+      force.setMagnitude(maxAcel);
+    }
+    return(force);
+  }
+  
+  Vector2D cohesion(ArrayList <Boid> near_boids){
+    pos_target.set(0,0);
+    for(int i=0; i<near_boids.size(); i++){
+      pos_target.add(near_boids.get(i).pos);
+    }
+    if (near_boids.size() != 0){
+      pos_target.divide_by(near_boids.size());
+    }
+    else{
+      pos_target.set(pos);
+    }
+    
+    Vector2D force = new Vector2D(pos_target);
+    force.substract(pos);
     force.substract(vel);
     if (force.getModule() > maxAcel){
       force.setMagnitude(maxAcel);
