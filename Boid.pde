@@ -1,6 +1,8 @@
 
 class Boid{
   float size = 10;
+  float maxAcel = 0.05;
+  float maxVel = 2;
   
   Vector2D pos;
   Vector2D vel;
@@ -18,10 +20,10 @@ class Boid{
   }
   
   void update(ArrayList <Boid> near_boids){
-    vel_target = this.align(near_boids);
     
-    vel.set(vel_target);
-    //vel.add(acel);
+    acel = this.align(near_boids);
+    vel.add(acel);
+    vel.setMagnitude(maxVel);
     pos.add(vel);
     
     if(pos.x > width){
@@ -60,6 +62,12 @@ class Boid{
     else{
       vel_target.set(vel);
     }
-    return(vel_target);
+    
+    Vector2D force = new Vector2D(vel_target);
+    force.substract(vel);
+    if (force.getModule() > maxAcel){
+      force.setMagnitude(maxAcel);
+    }
+    return(force);
   }
 }

@@ -8,6 +8,11 @@ class Vector2D {
     this.y = 0;
   }
   
+  Vector2D(Vector2D vect){
+    this.x = vect.x;
+    this.y = vect.y;
+  }
+  
   void set (float inX, float inY){
     this.x = inX;
     this.y = inY;
@@ -66,7 +71,7 @@ class Vector2D {
     return(unit);
   }
   
-  void set_unitary_values(Vector2D unit){
+  void set_unitary_values(Vector2D unit){  //Change direction, maintain magnitude.
     float mod = this.getModule();
     unit.multiply_by(mod);
     this.set(unit);
