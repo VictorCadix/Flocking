@@ -50,6 +50,7 @@ class Boid{
   }
   
   Vector2D align(ArrayList <Boid> near_boids){
+    vel_target.set(0,0);
     for(int i=0; i<near_boids.size(); i++){ //<>//
       vel_target.add(near_boids.get(i).vel);
     }
