@@ -23,16 +23,11 @@ class Flock{
           continue;
         }
         float dist = boids.get(n).dist2(boids.get(i));
-        if (dist < 100){
+        if (dist < 30){
           near_boids.add(boids.get(i));
         }
       }
       boids.get(n).update(near_boids);
-    }
-    println("FRAME");
-    for (int n=0; n<boids.size(); n++){
-      boids.get(n).vel.print_();
-      println();
     }
   }
   
