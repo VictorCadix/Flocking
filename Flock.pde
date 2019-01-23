@@ -23,7 +23,7 @@ class Flock{
           continue;
         }
         float dist = boids.get(n).dist2(boids.get(i));
-        if (dist < 30){
+        if (dist < 50){
           near_boids.add(boids.get(i));
         }
       }

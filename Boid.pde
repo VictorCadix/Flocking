@@ -21,11 +21,11 @@ class Boid{
   
   void update(ArrayList <Boid> near_boids){
     acel.set(0,0);
-    //acel.add(this.align(near_boids));
+    acel.add(this.align(near_boids));
     acel.add(this.cohesion(near_boids));
     
     vel.add(acel);
-    //vel.setMagnitude(maxVel);
+    vel.setMagnitude(maxVel);
     pos.add(vel);
     
     if(pos.x > width){
