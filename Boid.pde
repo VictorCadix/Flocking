@@ -25,7 +25,6 @@ class Boid{
     acel.add(this.cohesion(near_boids));
     
     vel.add(acel);
-    vel.setMagnitude(maxVel);
     pos.add(vel);
     
     if(pos.x > width){
@@ -66,6 +65,7 @@ class Boid{
     }
     
     Vector2D force = new Vector2D(vel_target);
+    force.setMagnitude(maxVel);
     force.substract(vel);
     if (force.getModule() > maxAcel){
       force.setMagnitude(maxAcel);
@@ -84,6 +84,7 @@ class Boid{
       
       force.set(pos_target);
       force.substract(pos);
+      force.setMagnitude(maxVel);
       force.substract(vel);
       if (force.getModule() > maxAcel){
         force.setMagnitude(maxAcel);
