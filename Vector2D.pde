@@ -88,3 +88,15 @@ class Vector2D {
     print("[" + str(this.x) + "," + str(this.y) + "]");
   }
 }
+
+Vector2D add (Vector2D vect1, Vector2D vect2){
+  Vector2D sum = new Vector2D(vect1);
+  sum.add(vect2);
+  return sum;
+}
+
+Vector2D substract (Vector2D vect1, Vector2D vect2){
+  Vector2D sum = new Vector2D(vect1);
+  sum.substract(vect2);
+  return sum;
+}
