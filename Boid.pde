@@ -21,8 +21,10 @@ class Boid{
   
   void update(ArrayList <Boid> near_boids){
     acel.set(0,0);
-    acel.add(this.align(near_boids));
-    acel.add(this.cohesion(near_boids));
+    println(alignSlider.getPos());
+    acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()));
+    acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()));
+    acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()));
     
     vel.add(acel);
     pos.add(vel);
@@ -42,6 +44,8 @@ class Boid{
   }
   
   void draw(){
+    fill(255);
+    stroke(1);
     ellipse(pos.x, pos.y, size, size);
   }
   
