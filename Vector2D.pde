@@ -48,9 +48,10 @@ class Vector2D {
     this.y -= vector.y;
   }
   
-  void multiply_by (float gain){
+  Vector2D multiply_by (float gain){
     this.x *= gain;
     this.y *= gain;
+    return this;
   }
   
   void divide_by (float div){
