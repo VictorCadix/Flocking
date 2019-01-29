@@ -93,4 +93,27 @@ class Boid{
     
     return(force);
   }
+  
+  Vector2D separation(ArrayList <Boid> near_boids){
+    Vector2D force = new Vector2D();
+    pos_target.set(0,0);
+    for(int i=0; i<near_boids.size(); i++){
+      Vector2D dir = new Vector2D();
+      dir.set(substract(this.pos,near_boids.get(i).pos));
+      float mag = 1/dir.getModule();
+      dir.setMagnitude(mag);
+      force.add(dir);
+    }
+    if (near_boids.size() != 0){
+      force.divide_by(near_boids.size());
+      force.setMagnitude(maxVel);
+      force.substract(vel);
+      
+      if (force.getModule() > maxAcel){
+        force.setMagnitude(maxAcel);
+      }
+    }   
+    
+    return(force);
+  }
 }
