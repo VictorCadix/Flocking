@@ -22,9 +22,9 @@ class Boid{
   void update(ArrayList <Boid> near_boids){
     acel.set(0,0);
     println(alignSlider.getPos());
-    acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()));
-    acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()));
-    acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()));
+    acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()/100));
+    acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()/100));
+    acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()/100));
     
     vel.add(acel);
     pos.add(vel);
@@ -104,7 +104,8 @@ class Boid{
     for(int i=0; i<near_boids.size(); i++){
       Vector2D dir = new Vector2D();
       dir.set(substract(this.pos,near_boids.get(i).pos));
-      float mag = 1/dir.getModule();
+      float mag = dir.getModule();
+      mag = 1/(mag * mag);
       dir.setMagnitude(mag);
       force.add(dir);
     }
