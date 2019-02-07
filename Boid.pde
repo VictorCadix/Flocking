@@ -21,7 +21,6 @@ class Boid{
   
   void update(ArrayList <Boid> near_boids){
     acel.set(0,0);
-    println(alignSlider.getPos());
     acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()/100));
     acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()/100));
     acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()/100));
@@ -53,7 +52,7 @@ class Boid{
     Vector2D dist = new Vector2D();
     dist.set(this.pos);
     dist.substract(other.pos);
-    return(abs(dist.getModule()));
+    return(dist.getModule());
   }
   
   Vector2D align(ArrayList <Boid> near_boids){
