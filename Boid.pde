@@ -70,9 +70,7 @@ class Boid{
     Vector2D force = new Vector2D(vel_target);
     force.setMagnitude(maxVel);
     force.substract(vel);
-    if (force.getModule() > maxAcel){
-      force.setMagnitude(maxAcel);
-    }
+    force.limit(maxAcel);
     return(force);
   }
   
@@ -89,10 +87,8 @@ class Boid{
       force.substract(pos);
       force.setMagnitude(maxVel);
       force.substract(vel);
-      if (force.getModule() > maxAcel){
-        force.setMagnitude(maxAcel);
-      }
-    }   
+      force.limit(maxAcel);
+    }
     
     return(force);
   }
@@ -112,10 +108,7 @@ class Boid{
       force.divide_by(near_boids.size());
       force.setMagnitude(maxVel);
       force.substract(vel);
-      
-      if (force.getModule() > maxAcel){
-        force.setMagnitude(maxAcel);
-      }
+      force.limit(maxAcel);
     }   
     
     return(force);

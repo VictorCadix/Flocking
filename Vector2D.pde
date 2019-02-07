@@ -85,6 +85,12 @@ class Vector2D {
     this.set(v);
   }
   
+  void limit(float lim){
+    if (this.getModule() > lim){
+      this.setMagnitude(lim);
+    }
+  }
+  
   void print_(){
     print("[" + str(this.x) + "," + str(this.y) + "]");
   }
