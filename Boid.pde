@@ -33,8 +33,10 @@ class Boid{
     acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()/100));
     acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()/100));
     acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()/100));
+    acel.limit(maxAcel);  
     
     newVel.add(acel);
+    newVel.limit(maxVel);
     newPos.add(newVel);
     
     if(newPos.x > width){
@@ -79,9 +81,7 @@ class Boid{
     }
     
     Vector2D force = new Vector2D(vel_target);
-    force.setMagnitude(maxVel);
     force.substract(vel);
-    force.limit(maxAcel);
     return(force);
   }
   
@@ -96,9 +96,6 @@ class Boid{
       
       force.set(pos_target);
       force.substract(pos);
-      force.setMagnitude(maxVel);
-      force.substract(vel);
-      force.limit(maxAcel);
     }
     
     return(force);
@@ -117,9 +114,6 @@ class Boid{
     }
     if (near_boids.size() != 0){
       force.divide_by(near_boids.size());
-      force.setMagnitude(maxVel);
-      force.substract(vel);
-      force.limit(maxAcel);
     }   
     
     return(force);
