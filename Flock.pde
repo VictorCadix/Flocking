@@ -7,8 +7,10 @@ class Flock{
     
     for(int i=0; i<total; i++){
       Boid boid = new Boid();
-      boid.vel.setRandom_with_maxMod(2);
-      boid.pos.set(random(width), random(height));
+      boid.newVel.setRandom_with_maxMod(2);
+      boid.newPos.set(random(width), random(height));
+      boid.vel.set(boid.newVel);
+      boid.pos.set(boid.newPos);
       boids.add(boid);
     }
   }

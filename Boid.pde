@@ -8,6 +8,10 @@ class Boid{
   Vector2D vel;
   Vector2D acel;
   
+  Vector2D newPos;
+  Vector2D newVel;
+  Vector2D newAcel;
+  
   Vector2D pos_target;
   Vector2D vel_target;
   
@@ -15,6 +19,11 @@ class Boid{
     pos = new Vector2D();
     vel = new Vector2D();
     acel = new Vector2D();
+    
+    newPos = new Vector2D();
+    newVel = new Vector2D();
+    newAcel = new Vector2D();
+    
     pos_target = new Vector2D();
     vel_target = new Vector2D();
   }
@@ -25,24 +34,26 @@ class Boid{
     acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()/100));
     acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()/100));
     
-    vel.add(acel);
-    pos.add(vel);
+    newVel.add(acel);
+    newPos.add(newVel);
     
-    if(pos.x > width){
-      pos.x = 0;
+    if(newPos.x > width){
+      newPos.x = 0;
     }
-    else if(pos.x < 0){
-      pos.x = width;
+    else if(newPos.x < 0){
+      newPos.x = width;
     }
-    if(pos.y > height){
-      pos.y = 0;
+    if(newPos.y > height){
+      newPos.y = 0;
     }
-    else if(pos.y < 0){
-      pos.y = height;
+    else if(newPos.y < 0){
+      newPos.y = height;
     }
   }
   
   void draw(){
+    pos.set(newPos);
+    vel.set(newVel);
     fill(255);
     stroke(1);
     ellipse(pos.x, pos.y, size, size);
@@ -57,7 +68,7 @@ class Boid{
   
   Vector2D align(ArrayList <Boid> near_boids){
     vel_target.set(0,0);
-    for(int i=0; i<near_boids.size(); i++){ //<>//
+    for(int i=0; i<near_boids.size(); i++){
       vel_target.add(near_boids.get(i).vel);
     }
     if (near_boids.size() != 0){
