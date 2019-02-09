@@ -1,5 +1,6 @@
 
 class Boid{
+  int number;   //For debug purpose only
   float size = 10;
   float maxAcel = 0.05;
   float maxVel = 2;
@@ -15,7 +16,8 @@ class Boid{
   Vector2D pos_target;
   Vector2D vel_target;
   
-  Boid(){
+  Boid(int num){
+    number = num;
     pos = new Vector2D();
     vel = new Vector2D();
     acel = new Vector2D();

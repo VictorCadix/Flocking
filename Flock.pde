@@ -6,7 +6,7 @@ class Flock{
     boids = new ArrayList <Boid>();
     
     for(int i=0; i<total; i++){
-      Boid boid = new Boid();
+      Boid boid = new Boid(i);
       boid.newVel.setRandom_with_maxMod(2);
       boid.newPos.set(random(width), random(height));
       boid.vel.set(boid.newVel);
