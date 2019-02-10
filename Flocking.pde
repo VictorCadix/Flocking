@@ -1,6 +1,8 @@
 Flock flock;
 HScrollbar alignSlider, cohesionSlider, separationSlider;
 
+int frameNumber = 0;
+
 void setup(){
   size(600,600);
   
@@ -12,6 +14,7 @@ void setup(){
 }
 
 void draw(){
+  frameNumber++;
   background(200);
   flock.update();
   flock.draw();  

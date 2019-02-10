@@ -31,10 +31,23 @@ class Boid{
   }
   
   void update(ArrayList <Boid> near_boids){
+    Vector2D alignForce = new Vector2D (align(near_boids));
+    Vector2D cohesForce = new Vector2D (cohesion(near_boids));
+    Vector2D repulForce = new Vector2D (separation(near_boids));
+    
+    //if (near_boids.size() > 0){
+    //  print(frameNumber);
+    //  print("/" + number); //<>//
+    //  print("/"); alignForce.print_();
+    //  print("/"); cohesForce.print_();
+    //  print("/"); repulForce.print_();
+    //  println();
+    //}
+    
     acel.set(0,0);
-    acel.add(this.align(near_boids).multiply_by(alignSlider.getPos()/100));
-    acel.add(this.cohesion(near_boids).multiply_by(cohesionSlider.getPos()/100));
-    acel.add(this.separation(near_boids).multiply_by(separationSlider.getPos()/100));
+    acel.add(alignForce.multiply_by(alignSlider.getPos()/100));
+    acel.add(cohesForce.multiply_by(cohesionSlider.getPos()/100));
+    acel.add(repulForce.multiply_by(separationSlider.getPos()/100));
     acel.limit(maxAcel);  
     
     newVel.add(acel);
