@@ -111,6 +111,7 @@ class Boid{
       
       force.set(pos_target);
       force.substract(pos);
+      force.limit(maxAcel);
     }
     
     return(force);
@@ -122,7 +123,8 @@ class Boid{
     for(int i=0; i<near_boids.size(); i++){
       Vector2D dir = new Vector2D();
       dir.set(substract(this.pos,near_boids.get(i).pos));
-      float mag = dir.getModule();
+      float mag = dir.getModule() - size;
+      mag = mag/10; //Scale
       mag = 1/(mag * mag);
       dir.setMagnitude(mag);
       force.add(dir);
