@@ -2,7 +2,7 @@
 class Boid{
   int number;   //For debug purpose only
   float size = 10;
-  float maxAcel = 0.05;
+  float maxAcel = 0.03;
   float maxVel = 2;
   
   Vector2D pos;
@@ -96,6 +96,7 @@ class Boid{
     }
     
     Vector2D force = new Vector2D(vel_target);
+    force.setMagnitude(maxVel);
     force.substract(vel);
     return(force);
   }
@@ -131,6 +132,7 @@ class Boid{
     }
     if (near_boids.size() != 0){
       force.divide_by(near_boids.size());
+      //force.limit(maxAcel);
     }   
     
     return(force);
