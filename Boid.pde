@@ -74,6 +74,7 @@ class Boid{
     fill(255);
     stroke(1);
     ellipse(pos.x, pos.y, size, size);
+    line(pos.x, pos.y, pos.x + vel.x*5, pos.y + vel.y*5);
   }
   
   float dist2(Boid other){
