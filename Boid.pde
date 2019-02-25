@@ -126,8 +126,11 @@ class Boid{
       Vector2D dir = new Vector2D();
       dir.set(substract(this.pos,near_boids.get(i).pos));
       float mag = dir.getModule() - size;
-      mag = mag/10; //Scale
-      mag = 1/(mag * mag);
+      if (mag < 0){
+        mag *= -1;
+      }
+      mag = mag/size; //Scale
+      mag = 1/mag;
       dir.setMagnitude(mag);
       force.add(dir);
     }
