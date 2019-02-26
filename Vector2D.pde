@@ -107,3 +107,9 @@ Vector2D substract (Vector2D vect1, Vector2D vect2){
   sum.substract(vect2);
   return sum;
 }
+
+float dotProduct(Vector2D vect1, Vector2D vect2){
+  float result;
+  result = vect1.x * vect2.x + vect1.y * vect2.y;
+  return result;
+}
