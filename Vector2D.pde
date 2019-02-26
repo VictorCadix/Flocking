@@ -113,3 +113,11 @@ float dotProduct(Vector2D vect1, Vector2D vect2){
   result = vect1.x * vect2.x + vect1.y * vect2.y;
   return result;
 }
+
+float angle_between(Vector2D vect1, Vector2D vect2){
+  float num = dotProduct(vect1, vect2);
+  float den = vect1.getModule() * vect2.getModule();
+  float result = acos(num/den);
+  result = degrees(result);
+  return result;
+}
