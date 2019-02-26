@@ -1,9 +1,14 @@
 
+
 class Boid{
   int number;   //For debug purpose only
   float size = 10;
   float maxAcel = 0.03;
   float maxVel = 2;
+  
+  float separ_gain = 1;
+  float cohes_gain = 0.1;
+  float align_gain = 0.7;
   
   Vector2D pos;
   Vector2D vel;
@@ -45,9 +50,9 @@ class Boid{
     //}
     
     acel.set(0,0);
-    acel.add(alignForce.multiply_by(alignSlider.getPos()/100));
-    acel.add(cohesForce.multiply_by(cohesionSlider.getPos()/100));
-    acel.add(repulForce.multiply_by(separationSlider.getPos()/100));
+    acel.add(alignForce.multiply_by(separ_gain));
+    acel.add(cohesForce.multiply_by(cohes_gain));
+    acel.add(repulForce.multiply_by(separ_gain));
     acel.limit(maxAcel);  
     
     newVel.add(acel);
