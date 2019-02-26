@@ -118,7 +118,9 @@ class Boid{
       
       force.set(pos_target);
       force.substract(pos);
-      //force.limit(maxAcel);
+      //SEEK
+      //force.setMagnitude(maxVel);
+      //force.substract(vel);
     }
     
     return(force);
