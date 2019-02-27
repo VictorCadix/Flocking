@@ -6,6 +6,9 @@ class Boid{
   float maxAcel = 0.03;
   float maxVel = 2;
   
+  float percep_radius = 50;
+  float percep_angle = 90;
+  
   float separ_gain = 1;
   float cohes_gain = 0.1;
   float align_gain = 0.7;

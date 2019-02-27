@@ -25,10 +25,10 @@ class Flock{
           continue;
         }
         float dist = boids.get(n).dist2(boids.get(i));
-        if (dist < 50){
+        if (dist < boids.get(n).percep_radius){
           Vector2D distVect = substract(boids.get(i).pos, boids.get(n).pos);
           float angle = angle_between(boids.get(n).vel, distVect);
-          if (angle < 90){
+          if (angle < boids.get(n).percep_angle){
             near_boids.add(boids.get(i));
           }
         }
