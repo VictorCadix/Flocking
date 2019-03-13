@@ -74,6 +74,9 @@ class Boid{
     else if(newPos.y < 0){
       newPos.y = height;
     }
+    
+    percep_radius = 50 + vel.getModule()/ maxVel * 50;
+    percep_angle = 180 - vel.getModule()/ maxVel * 90;
   }
   
   void draw(){
