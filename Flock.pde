@@ -15,7 +15,7 @@ class Flock{
     }
   }
   
-  void update(){
+  void update(Obstacle obstacle){
     for (int n=0; n<boids.size(); n++){
       ArrayList <Boid> near_boids;
       near_boids = new ArrayList <Boid>();
@@ -33,7 +33,7 @@ class Flock{
           }
         }
       }
-      boids.get(n).update(near_boids);
+      boids.get(n).update(near_boids, obstacle);
     }
   }
   

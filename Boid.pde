@@ -7,11 +7,12 @@ class Boid{
   float maxVel = 2;
   
   float percep_radius = 50;
-  float percep_angle = 90;
+  float percep_angle = 180;
   
   float separ_gain = 1;
   float cohes_gain = 0.1;
   float align_gain = 0.7;
+  float avoidance_gain = 0.1;
   
   Vector2D pos;
   Vector2D vel;
@@ -43,10 +44,19 @@ class Boid{
     Vector2D cohesForce = new Vector2D (cohesion(near_boids));
     Vector2D repulForce = new Vector2D (separation(near_boids));
     
+    ArrayList<Boid> obs;
+    obs = new ArrayList <Boid>();
+    Boid obstac = new Boid(0);
+    obstac.pos.set(obstacle.pos);
+    obstac.size = obstacle.radio;
+    obs.add(obstac);
+    
+    Vector2D obstAvoid = new Vector2D (separation(obs));
+    
     
     //if (near_boids.size() > 0){
     //  print(frameNumber);
-    //  print("/" + number); //<>// //<>//
+    //  print("/" + number); //<>//
     //  print("/"); alignForce.print_();
     //  print("/"); cohesForce.print_();
     //  print("/"); repulForce.print_();
@@ -57,7 +67,9 @@ class Boid{
     acel.add(alignForce.multiply_by(separ_gain));
     acel.add(cohesForce.multiply_by(cohes_gain));
     acel.add(repulForce.multiply_by(separ_gain));
-    acel.limit(maxAcel);  
+    acel.limit(maxAcel); 
+    acel.add(obstAvoid.multiply_by(avoidance_gain));
+     
     
     newVel.add(acel);
     newVel.limit(maxVel);

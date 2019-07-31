@@ -7,14 +7,14 @@ void setup(){
   size(600,600);
   
   flock = new Flock(50);
-  obstacle = new Obstacle(10,mouseX,mouseY);
+  obstacle = new Obstacle(20,mouseX,mouseY);
 }
 
 void draw(){
   frameNumber++;
   background(200);
-  flock.update();
   obstacle.pos.set(mouseX,mouseY);
+  flock.update(obstacle);
   flock.draw();
   obstacle.draw();
 }
