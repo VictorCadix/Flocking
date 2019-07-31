@@ -13,6 +13,11 @@ class Vector2D {
     this.y = vect.y;
   }
   
+  Vector2D(float x_val, float y_val){
+    this.x = x_val;
+    this.y = y_val;
+  }
+  
   void set (float inX, float inY){
     this.x = inX;
     this.y = inY;

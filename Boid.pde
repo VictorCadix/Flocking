@@ -38,14 +38,15 @@ class Boid{
     vel_target = new Vector2D();
   }
   
-  void update(ArrayList <Boid> near_boids){
+  void update(ArrayList <Boid> near_boids, Obstacle obstacle){
     Vector2D alignForce = new Vector2D (align(near_boids));
     Vector2D cohesForce = new Vector2D (cohesion(near_boids));
     Vector2D repulForce = new Vector2D (separation(near_boids));
     
+    
     //if (near_boids.size() > 0){
     //  print(frameNumber);
-    //  print("/" + number); //<>//
+    //  print("/" + number); //<>// //<>//
     //  print("/"); alignForce.print_();
     //  print("/"); cohesForce.print_();
     //  print("/"); repulForce.print_();
