@@ -66,7 +66,7 @@ class Boid{
     //}
     
     acel.set(0,0);
-    acel.add(alignForce.multiply_by(separ_gain));
+    acel.add(alignForce.multiply_by(align_gain));
     acel.add(cohesForce.multiply_by(cohes_gain));
     acel.add(repulForce.multiply_by(separ_gain));
     acel.limit(maxAcel); 
