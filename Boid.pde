@@ -13,6 +13,7 @@ class Boid{
   float cohes_gain = 0.1;
   float align_gain = 0.7;
   float avoidance_gain = 0.1;
+  float target_gain = 0.0005;
   
   Vector2D pos;
   Vector2D vel;
@@ -39,7 +40,7 @@ class Boid{
     vel_target = new Vector2D();
   }
   
-  void update(ArrayList <Boid> near_boids, Obstacle obstacle){
+  void update(ArrayList <Boid> near_boids, Obstacle obstacle, ArrayList<Target> targets){
     Vector2D alignForce = new Vector2D (align(near_boids));
     Vector2D cohesForce = new Vector2D (cohesion(near_boids));
     Vector2D repulForce = new Vector2D (separation(near_boids));
@@ -52,9 +53,16 @@ class Boid{
       obstac.size = obstacle.radio;
       obs.add(obstac);
     }
-    
     Vector2D obstAvoid = new Vector2D (separation(obs));
     
+    ArrayList<Boid> target_array;
+    target_array = new ArrayList <Boid>();
+    for (Target t : targets){
+      Boid target = new Boid(0);
+      target.pos.set(t.pos);
+      target_array.add(target);
+    }
+    Vector2D target_heading = new Vector2D (cohesion(target_array));
     
     //if (near_boids.size() > 0){
     //  print(frameNumber);
@@ -71,6 +79,7 @@ class Boid{
     acel.add(repulForce.multiply_by(separ_gain));
     acel.limit(maxAcel); 
     acel.add(obstAvoid.multiply_by(avoidance_gain));
+    acel.add(target_heading.multiply_by(target_gain));
      
     
     newVel.add(acel);

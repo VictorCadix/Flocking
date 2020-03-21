@@ -19,14 +19,14 @@ void draw(){
   background(200);
   obstacle.pos.set(mouseX,mouseY);
   target.pos.set(mouseX,mouseY);
-  flock.update(obstacle);
+  flock.update(obstacle,targets);
   flock.draw();
   obstacle.draw();
   target.draw();
   
   for(Target t : targets){
     t.draw();
-  } //<>//
+  }
 }
 
 void keyPressed() {
@@ -41,6 +41,7 @@ void keyPressed() {
 void mouseReleased(){
   if (target.show_state){
     Target t = new Target(target);
+    t.active_state = true;
     targets.add(t);
   }
 }
