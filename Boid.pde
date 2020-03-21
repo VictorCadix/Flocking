@@ -46,10 +46,12 @@ class Boid{
     
     ArrayList<Boid> obs;
     obs = new ArrayList <Boid>();
-    Boid obstac = new Boid(0);
-    obstac.pos.set(obstacle.pos);
-    obstac.size = obstacle.radio;
-    obs.add(obstac);
+    if (obstacle.active_state){
+      Boid obstac = new Boid(0);
+      obstac.pos.set(obstacle.pos);
+      obstac.size = obstacle.radio;
+      obs.add(obstac);
+    }
     
     Vector2D obstAvoid = new Vector2D (separation(obs));
     

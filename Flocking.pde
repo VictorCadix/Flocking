@@ -18,3 +18,9 @@ void draw(){
   flock.draw();
   obstacle.draw();
 }
+
+void keyPressed() {
+  if (key == 'o'){
+    obstacle.active_state = !obstacle.active_state;
+  }
+}
