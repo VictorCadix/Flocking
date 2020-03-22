@@ -3,16 +3,16 @@
 class Boid{
   int number;   //For debug purpose only
   float size = 10;
-  float maxAcel = 0.03;
+  float maxAcel = 0.05;
   float maxVel = 2;
   
   float percep_radius = 50;
   float percep_angle = 180;
   
-  float separ_gain = 1;
+  float separ_gain = 10;
   float cohes_gain = 0.1;
-  float align_gain = 0.7;
-  float avoidance_gain = 0.1;
+  float align_gain = 0.5;
+  float avoidance_gain = 0.2;
   float target_gain = 0.0005;
   
   Vector2D pos;
@@ -55,14 +55,7 @@ class Boid{
     }
     Vector2D obstAvoid = new Vector2D (separation(obs));
     
-    ArrayList<Boid> target_array;
-    target_array = new ArrayList <Boid>();
-    for (Target t : targets){
-      Boid target = new Boid(0);
-      target.pos.set(t.pos);
-      target_array.add(target);
-    }
-    Vector2D target_heading = new Vector2D (cohesion(target_array));
+    Vector2D target_heading = new Vector2D (targetDir(targets));
     
     //if (near_boids.size() > 0){
     //  print(frameNumber);
@@ -175,6 +168,34 @@ class Boid{
       //force.divide_by(near_boids.size());
       //force.limit(maxAcel);
     //}   
+    
+    return(force);
+  }
+  
+  Vector2D targetDir(ArrayList <Target> targets){
+    Vector2D force = new Vector2D();
+    
+    //Compute distances
+    FloatList dist_array;
+    dist_array = new FloatList();
+    float dist_sum = 0;
+    for(Target targ : targets){
+      Vector2D dist = new Vector2D();
+      dist.set(substract(targ.pos, this.pos));
+      dist_array.append(dist.getModule());
+      dist_sum += dist.getModule();
+    }
+    for(int i = 0; i < dist_array.size(); i++){
+      float mod = 1 - dist_array.get(i) / dist_sum;
+      Vector2D dir = new Vector2D();
+      dir.set(substract(targets.get(i).pos, this.pos));
+      dir.setMagnitude(mod);
+      force.add(dir);
+    }
+    
+    if (targets.size() != 0){
+      force.divide_by(targets.size());
+    }
     
     return(force);
   }

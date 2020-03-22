@@ -20,13 +20,13 @@ void draw(){
   obstacle.pos.set(mouseX,mouseY);
   target.pos.set(mouseX,mouseY);
   flock.update(obstacle,targets);
+  
+  for(Target t : targets){t.draw();}
   flock.draw();
   obstacle.draw();
   target.draw();
   
-  for(Target t : targets){
-    t.draw();
-  }
+  
 }
 
 void keyPressed() {
