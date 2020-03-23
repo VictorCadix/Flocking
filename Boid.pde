@@ -9,11 +9,11 @@ class Boid{
   float percep_radius = 50;
   float percep_angle = 180;
   
-  float separ_gain = 10;
+  float separ_gain = 5;
   float cohes_gain = 0.1;
   float align_gain = 0.5;
   float avoidance_gain = 0.2;
-  float target_gain = 0.0005;
+  float target_gain = 0.2;
   
   Vector2D pos;
   Vector2D vel;
@@ -176,19 +176,20 @@ class Boid{
     Vector2D force = new Vector2D();
     
     //Compute distances
-    FloatList dist_array;
-    dist_array = new FloatList();
+    ArrayList <Vector2D> dist_array;
+    dist_array = new ArrayList <Vector2D>();
+    
     float dist_sum = 0;
     for(Target targ : targets){
       Vector2D dist = new Vector2D();
       dist.set(substract(targ.pos, this.pos));
-      dist_array.append(dist.getModule());
+      dist_array.add(dist);
       dist_sum += dist.getModule();
     }
     for(int i = 0; i < dist_array.size(); i++){
-      float mod = 1 - dist_array.get(i) / dist_sum;
+      float mod = 1 - dist_array.get(i).getModule() / dist_sum;
       Vector2D dir = new Vector2D();
-      dir.set(substract(targets.get(i).pos, this.pos));
+      dir.set(dist_array.get(i));
       dir.setMagnitude(mod);
       force.add(dir);
     }
